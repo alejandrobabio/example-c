@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "equipo.h"
 #include "jugador.h"
+
 struct EquipoEstructura
 {
   char nombreEquipo[20];
@@ -10,10 +11,12 @@ struct EquipoEstructura
   char nombreEstadio[50];
   Jugador jugadores[23];
 };
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Pre:
 //Post:
 //Axiomas:
+
 Equipo crearEquipo (char nombreEquipo[20], char nombreEstadio[50])
 {
   Equipo e = malloc(sizeof(struct EquipoEstructura));
@@ -42,7 +45,7 @@ Equipo agregarJugador(Equipo e)
     printf("Ingrese un apellido\n");
     fflush(stdin);
     gets(apellido);
-// y asignarlo al vector de jugadores, una vez hecho, cantidadJugadores mas uno
+    // y asignarlo al vector de jugadores, una vez hecho, cantidadJugadores mas uno
     //int dni, char nombre[20], char apellido[20]
     //nuevoJugador = crearJugador(dni, nombre, apellido);
     e->jugadores[e->cantidadJugadores] = crearJugador(dni, nombre, apellido);
@@ -67,7 +70,7 @@ void mostrarEquipo(Equipo e)
     //    for (i = 0; i < e->cantidadJugadores; i++){
     //        printf("%s \n", e->jugadores[i]->nombre);
     //    }
-
+    mostrarJugadores(e);
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Pre:
@@ -77,6 +80,17 @@ void mostrarJugadores(Equipo e){
 
 
     printf("--------------Jugadores del equipo------------\n");
+
+    int cantJug, i;
+    Jugador ptr_jug;
+
+    cantJug = getCantidadJugadores(e);
+
+    for(i = 0; i < cantJug; i++) {
+      printf("Jugador %d: ", i );
+      mostrarJugador(e->jugadores[i]);
+    }
+
 }
 
 char * getNombreEquipo(Equipo e){
